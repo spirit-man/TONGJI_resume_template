@@ -1,0 +1,369 @@
+% 从NPU CV修改来的同济版本，感谢https://www.overleaf.com/latex/templates/npu-cv/mncqzxhvfzrx
+% 可以自己控制/vspace不同节之间的间距
+\iffalse
+	前言：
+		参考自一个祖传的模板，以及https://github.com/LeyuDame/BNUCV/tree/main 上的BNU的latex简历模板中的代码。
+		注意要用XeLaTeX编译链进行编译，且要进行三次编译才能显示照片。问就是LaTeX的锅。
+		vscode+latex的话，配置的json中"latex-workshop.latex.recipes"添加：
+		{
+            "name": "XeLaTeX*3",
+            "tools": [
+                "xelatex",
+                "xelatex",
+                "xelatex"
+            ]
+        }
+		即可使用三次XeLaTeX编译。
+
+		LaTeX+VScode怎么配置看https://www.zhihu.com/column/p/166523064。
+
+        每个章节的格式都能混着用，顺序都可以变，只是给了个例子。
+        比如你找工作，可以把技能那部分往前挪。
+        比如你竞赛经历很多，你就往前挪。
+        比如你觉得“其他”有点多余，就删了。
+
+        主要贡献还是把原本word的那个模板页眉页脚和背景完美加进来了。
+        LaTeX排版就是很整齐，强迫症狂喜。
+
+
+        记得要三次XeLaTeX编译！！！
+        记得要三次XeLaTeX编译！！！
+        记得要三次XeLaTeX编译！！！
+        这个很重要，所以说三遍！
+
+        你可以试试两次的，好像某些环境两次编译也能显示图像，但最好还是三次编译。
+\fi
+
+\documentclass[4pt]{article}
+\usepackage{xltxtra}
+\usepackage{bookmark}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\usepackage{url}
+\urlstyle{tt}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{relsize}
+\usepackage{xspace}
+\usepackage{fontawesome}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{siunitx}
+\usepackage{amssymb}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{fontspec}
+\usepackage{array}
+\usepackage{footmisc}
+
+\newcommand{\blfootnote}[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\newcommand{\graytext}[1]{{\color{gray}#1}}
+\newcommand{\fsize}[1]{{\csname #1\endcsname}}
+
+% 一些小设置，参考自https://github.com/LeyuDame/BNUCV/tree/main
+\CJKsetecglue{}							            % 取消中文字符与数字之间的间隔
+\protected\def\Cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.28ex}{\relsize{-1}++}}\xspace}	% 这是个更好看的C++写法，你直接写C++的话，+号会很大，可以使用\Cpp来代替
+\setlength{\parindent}{0pt}							% 取消全局段落缩进
+\pagenumbering{gobble}								% 取消页码显示
+%\setlist{noitemsep}									% 禁用列表中项目之间的额外垂直间距，但保留列表周围的间距
+%\setlist{nosep}										% 禁用列表中项目之间的额外垂直间距及列表周围的间距
+% \setlist[itemize]{topsep=0em, leftmargin=*}		% 增加了itemize顶部间距
+% \setlist[enumerate]{topsep=-2em, leftmargin=*}	% 增加了enumerate顶部间距
+\setlist[itemize]{topsep=0em, itemsep=0em, parsep=0em, leftmargin=*}		% itemsep控制项目间距
+\setlist[enumerate]{topsep=0em, itemsep=0em, parsep=0em, leftmargin=*}	
+
+\titleformat{\section}					    % 将原标题前面的数字取消了
+  {\large\bfseries\raggedright} 		      % 字体改为LARGE，bold，左对齐
+  {}{0em}                      			  % 可用于添加全局标题前缀
+  {}                           			  % 可用于添加代码
+  [{\color{NPU_Blue}\titlerule}]            % 标题下方加一条线
+\titlespacing*{\section}{0cm}{*1.2}{*1.2}	% 标题左边留白，上方1.2倍，下方1.2倍
+
+\titleformat{\subsection}				    % 将原二级标题前面的数字取消了
+  {\large\bfseries\raggedright} 		      % 字体改为large，bold，左对齐
+  {}{0em}                      			  % 可用于添加全局二级标题前缀
+  {}                           			  % 可用于添加代码
+  []
+\titlespacing*{\subsection}{0cm}{*0.8}{*0.2}% 二级标题左边留白，上方1.2倍，下方1.2倍
+
+% 页面大小与页边距，按需求调整
+\usepackage[
+	a4paper,
+	left=1.2cm,
+	right=1.2cm,
+	top=1.5cm,
+	bottom=1cm,
+	nohead
+]{geometry}
+
+% 中文字符间距
+\renewcommand{\CJKglue}{\hskip 0.05em}
+
+% % 英文字体
+% \setmainfont[
+%     Path=fonts/,
+%     Extension=.ttf,
+%     BoldFont=* Bold,
+% ]{Microsoft Yahei}
+% % 中文字体
+% \setCJKmainfont[
+%     Path=fonts/,
+%     Extension=.ttf,
+%     BoldFont=* Bold,
+% ]{Microsoft Yahei}
+
+% % 英文字体
+% \setmainfont[
+%     Path=fonts/,
+%     Extension=.otf,
+%     AutoFakeBold=true,
+% ]{Times-New-Roman}
+\setmainfont[
+    Path=fonts/,
+    Extension=.otf,
+    AutoFakeBold=1.5,  % 增加数值使字体更粗
+    BoldFeatures={FakeBold=2},  % 专门控制粗体的粗度
+]{Times-New-Roman}
+
+% 中文字体
+\setCJKmainfont[
+    Path=fonts/,
+    Extension=.otf,
+    AutoFakeBold=true,
+]{AdobeSongStd-Light}
+
+
+% 主题色
+% 西工大蓝
+% \definecolor{NPU_Blue}{RGB}{0, 80, 158}
+\definecolor{NPU_Blue}{RGB}{0, 96, 151}
+% 这里把表格的行间距调成1.2倍了
+\renewcommand{\arraystretch}{1.2}
+% 这里把正文的行间距调成1.2倍了
+\linespread{1.2}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    ！！！！！！！！ 记得改这里 ！！！！！！！！
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 学院
+\newcommand{\school}{\small{下北泽豪俊影视学院 | Shimokitazawa Legendary Film Academy (SLFA)}}
+% 也可以不写英语
+%\newcommand{\school}{电子信息学院}
+% 联系方式
+\newcommand{\contact}
+{
+    \small              % 换了更小的字号
+    % \footnotesize       % 这比上面的小一号
+    \scriptsize         % 这比上面的再小一号
+    \textcolor{white}
+    {
+        \faEnvelope \quad \href{mailto:114514@tongji.edu.cn}{114514@tongji.edu.cn}    % 邮箱，前面的超链接可以直达邮箱软件
+        \hspace{4em}    % 这里可以调间距
+        \faWechat \quad senpeiiski               % 微信
+        \hspace{4em}    % 这里可以调间距
+        \faPhone \quad 1919810                  % 手机号
+        \hspace{4em}    % 这里可以调间距
+        \faGithub \quad \href{https://github.com/spirit-man}{https://github.com/spirit-man}         % github
+    }
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    ！！！！！！！！ 这里开始就是正文了 ！！！！！！！！
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	% 如果有多页简历，请把页眉页脚和背景复制粘贴到第二页的内容之前
+	% 页眉，校徽，学院名
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[anchor=north, inner sep=0pt](header) at (current page.north){
+			\includegraphics[width=\paperwidth]{images/header.png}
+		};
+		\node[anchor=west](school_logo) at (header.west){
+			\hspace{0.5cm}
+			\includegraphics[width=0.2\textwidth]{images/logowhite.png}
+		};
+		\node[anchor=east](school_name) at(header.east){
+			\textcolor{white}{\textbf{\school}}
+			\hspace{0.5cm}
+		};
+	\end{tikzpicture}
+	\vspace{-4em}
+
+	% 页脚，联系方式
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[anchor=south, inner sep=0pt](footer) at (current page.south){
+			\includegraphics[width=\paperwidth]{images/footer.png}
+		};
+        % 联系方式
+        \node[anchor=center] at(footer.center){\contact};
+	\end{tikzpicture}
+	
+	% 背景
+	\begin{tikzpicture}[remember picture, overlay]
+		\node[opacity=0] at(current page.center){
+			\includegraphics[width=0.7\paperwidth, keepaspectratio]{images/badge.png}
+		};
+	\end{tikzpicture}
+    
+
+    \begin{figure}[h]
+    % 左半边，信息，比例可以调整
+    \begin{minipage}{0.87\textwidth}
+        \vspace{-1.8em}
+        % \section{\makebox[\widthof{\faGraduationCap}][c]{\color{NPU_Blue}{\faUser}}\quad 个人信息}
+        \begin{center}
+            % 名字居中显示，字号放大
+            {\huge\bfseries 李田所}
+            
+            \vspace{0.5em} % 调整名字和下方信息的间距
+            1919810\quad$\vert$ \quad \href{mailto:114514@tongji.edu.cn} {114514@tongji.edu.cn}\quad$\vert$ \quad 上海市\\
+            研二 \quad$\vert$ \quad 出生日期：2001年5月14日 \quad$\vert$ \quad 求职意向：国家特级演员/量化调酒师
+            
+        \end{center}
+    \end{minipage}
+    % 右半边，照片
+    \begin{minipage}{0.12\textwidth}
+        \vspace{-0.1em}
+        \includegraphics[width=\linewidth]{images/先辈帅气版.png}
+    \end{minipage}
+    \end{figure}
+
+
+    \vspace{-3em}
+	% 教育背景
+    	% \faGraduationCap这类\fa开头的都是font awesome里的logo，想换成其他logo的话，可以看一下附带的fontawsome.pdf，自行替换。
+		% \section{\makebox[\widthof{     这里！    }][c]{\color{NPU_Blue}{     和这里！    }}\quad 标题}
+	\section{\makebox[\widthof{\faGraduationCap}][c]{\color{NPU_Blue}{\faGraduationCap}}\quad 教育背景}
+	\vspace{-1.5em}
+    
+    \begin{table}[h!]
+    
+        \hspace{-0.9em}
+        \begin{tabularx}{\textwidth}{p{\widthof{同济大学下北泽豪俊影视学院}}p{\widthof{行为艺术硕士}}p{\widthof{2019年9月-2023年7月}}X}
+        
+        \textbf{同济大学下北泽豪俊影视学院}     & \textbf{表演学士}        & 2019年9月-2023年7月     & GPA： 10/9 \textbf{（排名： 114/514）}    \\
+        \multicolumn{4}{l}{课程： 红茶品鉴与应急处理基础，野兽咆哮发声技巧，毕业设计：《速达优》，小学期：校园突击演出等 }                           \vspace{0.5em} \\ 
+        \textbf{同济大学下北泽豪俊影视学院}     & \textbf{行为艺术硕士}     & 2023年9月-2026年7月     & GPA： 9/10                \\
+        \multicolumn{4}{l}{课程： 先锋行为艺术理论，迷因符号学研究方法，行为艺术田野调查方法，极限空间行为艺术等}
+        \end{tabularx}
+
+    \end{table}
+
+    \vspace{-1em}
+    % 项目经历（找导师一般都看中这个），可以改成“科研经历”
+        % \faGears 这是齿轮，适合机械类，我电信的也喜欢齿轮，就用这个了
+        % \faFlask 这是烧瓶，适合生化类
+        % \faLaptop 这是个笔记本电脑，适合计算机类
+        % \faUsers 这是三个人，适合商科
+    \section{\makebox[\widthof{\faGraduationCap}][c]{\color{NPU_Blue}{\faLaptop}}\quad 项目经历}
+    % \vspace{0.5em}
+    % 小技巧，老师想看的重点加粗，比如商科类的一般更想看到数字，工科类的更想看到技术
+    \subsection{Research on Wild Beast Aesthetics and Its Impact on Contemporary Performance Art \hfill SCI期刊-在审}
+    \textbf{第一作者，独立完成全部研究工作} \hfill 2024年1月至今
+
+    \begin{itemize}
+        \item 基于\textbf{野兽美学理论与表演艺术学}，构建了包含突发性、魔性度、浮夸度三个维度的\textbf{野兽表演评价体系}。{\textsuperscript{\textbf{\color{red}*}}}
+        \item 提出\textbf{多模态野兽表演特征提取方法}，在全球114个表演数据集上进行实验，表演魔性度评分较传统方法提升514\%。
+    \end{itemize}
+
+    
+    % 这是个工科类加粗的例子
+    \vspace{0.5em}                % 这是换行用的
+    \subsection{突发事件智能应对与红茶应急处理系统 \hfill 国家发明专利}
+
+    \textbf{独立开发，项目负责人} \hfill 2023年10月至2024年3月
+
+    \begin{itemize}
+        \item 设计了基于\textbf{深度学习的红茶品质评估算法}，实现了对红茶温度、浓度的实时监控，准确率达到114.514\%。
+        \item 开发了\textbf{多场景突发事件处理模块}，支持包括\textbf{速速进行、一般巡查、紧急咆哮}在内的24种应急预案。
+    \end{itemize}
+
+
+    % 不知道写啥好
+    \vspace{0.5em}                % 这是换行用的
+    \subsection{野兽咆哮特征识别与分析系统 \hfill 国家级大学生创新创业项目}
+        
+    \textbf{项目组长，带领3人团队} \hfill 2023年7月至2023年12月
+
+    % 在研的也能写
+    % 课程大作业也能写，但是不要标明是大作业就行
+    \begin{itemize}
+        \item 构建了\textbf{野兽咆哮音频数据库}，包含超过1919个高质量样本，覆盖810种不同场景下的咆哮特征。
+        \item 实现了基于\textbf{深度学习的咆哮特征提取与分类系统}，支持实时识别与评分，在校园突发事件演出中应用效果显著。
+    \end{itemize}
+    
+    
+    % 竞赛经历（找导师也可能看中这个，因为代表了一定实践能力，但是尽量对口吧，不要运动会都写进去了）
+    \section{\makebox[\widthof{\faTrophy}][c]{\color{NPU_Blue}{\faTrophy}}\quad 竞赛经历}
+    \vspace{-1em}
+    \begin{table}[h!]
+        \begin{tabularx}{\textwidth}{Xp{\widthof{首席王爷}}p{\widthof{皇室认证-特等奖}}p{\widthof{2024年5月}}}
+            \textbf{2024年全国王爷杯贵族风度大赛} & 首席王爷 & 皇室认证-特等奖 & 2024年5月 \\
+            \textbf{2023年迫真空手道锦标赛} & 真空担当 & 宇宙级-金牌 & 2023年11月\\
+            \textbf{2024年国际提肛艺术表演大赛} & 个人参赛 & 全球级-卫冕冠军 & 2024年2月\\
+        \end{tabularx}
+    \end{table}
+    
+    \vspace{-1em}
+    % 其他（也是看你想不想写）
+    \section{\makebox[\widthof{\faGraduationCap}][c]{\color{NPU_Blue}{\faStar}}\quad 所获荣誉}
+    \newlength{\datewidth}
+    \settowidth{\datewidth}{2024年10月}
+    \newcommand{\dateitem}[2]{\item \makebox[\datewidth][l]{#1}\hspace{2.5em}#2}
+    \begin{itemize}
+        \dateitem{2024年10月}{获得\textbf{迫真空手道部年度最佳真空雷普奖}}
+        \dateitem{2024年7月}{荣获\textbf{会员制餐厅114514号终身VIP会员认证}}
+        \dateitem{2024年5月}{担任\textbf{下北泽野兽足球队主力前锋}，赛季进球1919个}
+        \dateitem{2024年3月}{获评\textbf{下北泽第二小学优秀课后辅导员}，深受小朋友喜爱}
+        \dateitem{2023年12月}{接受\textbf{《野兽风云》杂志专访}，并被评为年度最具影响力人物}
+    \end{itemize}
+    
+    % \vspace{-1em}
+    % 其他（也是看你想不想写）
+    
+    % 技能特长，上面写很多的话，这里就随便写点，反正上面都看出来了。上面写的不多的话，这里着重强调你会什么。
+    % 哦，你找工作的话，这里多写点，记得对口，可以\textbf{}加粗。
+    % 这里能吹牛皮就吹牛皮，但是确保面试的时候别露馅就行。
+    \section{\makebox[\widthof{\faGraduationCap}][c]{\color{NPU_Blue}{\faWrench}}\quad 技能特长}
+    % \vspace{0.5em}
+    \begin{itemize}
+        \item 编程能力：熟练使用{\Cpp} 、Python、MATLAB、Shell编程语言与 {\LaTeX}排版。
+        \item 英语水平：雅思2.4，四级114，六级514。
+        \item 专业能力：精通\textbf{迫真点云调教，野兽操作系统，24帧优化大师，先辈级HOMO姿态估计，深度恶臭学习框架等}，熟练掌握\textbf{哲学级调试工具，沼气泄露探测器等}。
+        \item 技术视野：深入研究多器官联合感知技术、深度恶臭学习算法，精通\textbf{淫梦语言模型、视觉哲学模型、114514维度具身智能}等前沿技术。
+    \end{itemize}
+
+    % % 所获荣誉（这个看你想不想写了）
+    % \section{\makebox[\widthof{\faStar}][c]{\color{NPU_Blue}{\faStar}}\quad 所获荣誉}
+    % \vspace{-1em}
+    % \begin{multicols}{2}
+    %     \begin{itemize}
+    %         \item 某年学业先进个人
+    %         \item 某年某奖学金某等奖
+    %         \item 某大使
+    %         \item 某年某奖学金某等奖
+    %         \item 某年优秀团员称号
+    %         \item 某年某称号
+    %     \end{itemize}
+    % \end{multicols}
+
+    
+\vfill
+\vspace{1em}
+\noindent{\color{NPU_Blue}\rule{\textwidth}{0.4pt}}
+\vspace{0.3em}
+\noindent\footnotesize{$^1$标注{\textsuperscript{\textbf{\color{red}*}}}
+的项目已开源至本人GitHub账号：https://github.com/spirit-man}，欢迎批评指教！
+\end{document}
